@@ -2,14 +2,14 @@
 using namespace std;
 #include"Vector.h"
 #include"List.h"
-/*全局变量*/
+/*Global variables*/
 List Result;
 Vector *Action = NULL;
 Vector max;
 int Count = 0;
-//Result用来储存决策结果
-//Action为决策集合
-//count为决策集合大小
+//Result is used to store results
+//Action is store decision variables
+//count is used to record the number of moves
 
 void CreateAction(int n, Vector *Action) {
 	int i, j;
@@ -28,13 +28,17 @@ bool Run(Vector, int);
 int main()
 {
 	int x, y, n;
-	//x为商人数,y为仆人数,n为船中最大容量
+	/***********
+	x Number of Merchants
+	y as servant number
+	n for the maximum capacity of the ship
+	***********/
 	Vector start;
-	cout << "输入商人数  ";
+	cout << "Input Number of Merchants  ";
 	cin >> x;
-	cout << "输入仆人数  ";
+	cout << "Input Number of servant  ";
 	cin >> y;
-	cout << "输入船的最大容量  ";
+	cout << "Input Number of maximum capacity of the ship  ";
 	cin >> n;
 	start.Set(x, y);
 	max.Set(x, y);
@@ -53,8 +57,6 @@ int main()
 
 
 bool Run(Vector now, int n) {
-	//now为当前状态
-	//n为当前渡河次数
 	Vector temp;
 	int i;
 	if (now == temp)
@@ -66,9 +68,9 @@ bool Run(Vector now, int n) {
 		else
 			temp = now + Action[i];
 		if (temp.IsSafe(max) == true) {
-			//判断now+(-1)n*temp是否为安全状态
+			//if the action is feasible
 			if (Result.IsLoop(temp, n)) {
-				//判断是否产生回路
+				//if it's not a dead loop
 				Result.Insert(temp, n);
 				if (Run(temp, n + 1))
 					return true;

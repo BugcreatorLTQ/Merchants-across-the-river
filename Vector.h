@@ -5,8 +5,8 @@ private:
 	int y;
 public:
 	Vector(int x = 0, int y = 0) { this->x = x; this->y = y; };
-	Vector operator+(Vector &action);	//向量加法
-	Vector operator-(Vector &action);	//向量减法
+	Vector operator+(Vector &action);	//Add
+	Vector operator-(Vector &action);	//Sub
 	bool operator==(Vector &action) { if ((x == action.x) && (y == action.y))return true; else return false; };
 	bool IsSafe(Vector &max);
 	void Set(int a, int b) { x = a; y = b; };
@@ -28,6 +28,7 @@ Vector Vector::operator-(Vector &action) {
 }
 
 bool Vector::IsSafe(Vector &max) {
+	//determine whether the current dexision is feasible
 	if (x > max.x || y > max.y)
 		return false;
 	if (x < 0 || y < 0)

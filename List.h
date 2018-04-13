@@ -11,11 +11,11 @@ private:
 	Node rear;
 public:
 	List() { head = new node; rear = head; head->next = NULL; };
-	~List();//析构
+	~List();//destructor
 	void Insert(Vector &action,int n);
-	void Show();//输出链表
-	void Delete();//删除最后一个节点
-	bool IsLoop(Vector &action, int n);//判断是否为死循环
+	void Show();//Show this List
+	void Delete();//Delete last node
+	bool IsLoop(Vector &action, int n);//judging dead Loops
 };
 
 List::~List() {
