@@ -10,8 +10,19 @@ public:
 	bool operator==(Vector &action) { if ((x == action.x) && (y == action.y))return true; else return false; };
 	bool IsSafe(Vector &max);
 	void Set(int a, int b) { x = a; y = b; };
-	friend ostream& operator<<(ostream& o,const Vector& action);
+	void ShowSolution();
+	void ShowResult();
 };
+
+void Vector::ShowResult()
+{
+	printf("River: %d %d\n", x, y);
+}
+
+void Vector::ShowSolution()
+{
+	printf("Ship : %d %d\n", x, y);
+}
 
 Vector Vector::operator+(Vector &action) {
 	Vector temp = *this;
@@ -40,9 +51,5 @@ bool Vector::IsSafe(Vector &max) {
 	return false;
 }
 
-ostream& operator<<(ostream& o,const Vector& action) {
-	o << "( " << action.x << " , " << action.y << " )";
-	return o;
-}
 
 

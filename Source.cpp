@@ -3,7 +3,7 @@ using namespace std;
 #include"Vector.h"
 #include"List.h"
 /*Global variables*/
-List Result;
+List Result,Solution;
 Vector *Action = NULL;
 Vector max;
 int Count = 0;
@@ -11,7 +11,7 @@ int Count = 0;
 //Action is store decision variables
 //count is used to record the number of moves
 
-void CreateAction(int n, Vector *Action) {
+void CreateAction(int n) {
 	int i, j;
 	int loop = 0;
 	for (i = 0; i <= n; i++) {
@@ -45,9 +45,9 @@ int main()
 	Result.Insert(start, 0);
 	Count = (n + 1)*(n + 2) / 2 - 1;
 	Action = new Vector[Count];
-	CreateAction(n, Action);
+	CreateAction(n);
 	if (Run(start, 1))
-		Result.Show();
+		Result.Show(Solution);
 	else
 		puts("No Plan!");
 	delete[] Action;
@@ -72,10 +72,13 @@ bool Run(Vector now, int n) {
 			if (Result.IsLoop(temp, n)) {
 				//if it's not a dead loop
 				Result.Insert(temp, n);
+				Solution.Insert(Action[i],n);
 				if (Run(temp, n + 1))
 					return true;
-				else
+				else {
 					Result.Delete();
+					Solution.Delete();
+				}
 			}
 		}
 	}
